@@ -12,7 +12,7 @@ fi
 LC_ALL=es_AR.UTF-8
 PATH=${PATH}:~/bin:~/local/bin:~/usr/bin:/sbin:/usr/sbin:/usr/local/sbin
 EDITOR=joe
-VISUAL=joe
+VISUAL=cream
 PAGER=less
 
 #

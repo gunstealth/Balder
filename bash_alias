@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+
+alias cpaste="ls /tmp/ccopy* | sed 's|[^\.]*.\.||' | xargs -I % mv /tmp/ccopy.% ./%"
+alias ls='ls -F --color'
+alias l='ls -l -F --color'
+alias la='ls -a -F --color'
+alias logout='clear && logout'
+alias j='joe'
+alias ll='ls -lh -a -F --color'
+alias cdp='cd /home/pub/'
+alias cd..='cd ..'
+alias msg='sudo tail -f /var/log/messages'
+alias gmail='fetchmail -v -m "procmail -d %T"'
+alias less='less -x 4'
+alias rbak='rm *~'
+alias cdw='cd ~/local/work'
+alias sshot='import -window root shot-$(date +%Y%m%d%k%M).jpg'
+alias dirf='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"'
+alias clasicos="history | awk '{print $2}' | sort | uniq -c | sort -rn | head "
+

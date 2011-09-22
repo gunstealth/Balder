@@ -1,0 +1,59 @@
+#!/bin/sh
+#
+
+function clear ()
+{
+	tput clear
+}
+
+function psgrep ()
+{
+	ps -A | grep $1 | grep -v grep
+}
+
+function pskill ()
+{
+	local pid
+
+	pid=$(ps -A | grep $1 | grep -v grep | awk '{ print $1 }')
+	echo -n "killing $1 (pid ${pid})... "
+	kill -9 ${pid}
+	echo "ok"
+}
+
+function new-alias ()
+{
+	local name=$1
+	local value="$2"
+
+	echo alias ${name}=\'${value}\' >> ~/.bashrc
+	eval alias ${name}=\'${value}\'
+	alias ${name}
+}
+
+function push ()
+{
+	pushd .
+}
+
+
+function bat ()
+{
+	echo "Battery status: "
+	cat /proc/acpi/battery/BAT0/state | grep "present"
+	cat /proc/acpi/battery/BAT0/state | grep "charging state"
+	cat /proc/acpi/battery/BAT0/info | grep "design capacity:"
+	cat /proc/acpi/battery/BAT0/info | grep warning
+	cat /proc/acpi/battery/BAT0/state | grep remaining
+}
+
+function ccopy ()
+{ 
+	cp $1 /tmp/ccopy.$1; 
+}
+
+function calc ()
+{ 
+	echo "${1}"|bc -l; 
+}
+
