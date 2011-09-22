@@ -1,19 +1,32 @@
 #!/bin/sh
-#                                                       -*- .bashrc - 0.2 -*-
-# Copyright (C) 2003, 2004, 2005, 2006 Mauro N. Guerra.
+#                                                       -*- .bash_profile - 0.5 -*-
+# Copyright (C) (2003, 2011) Mauro N. Guerra.
 #
 # * 02/01/2006 re-write and cleanup.
-#
+# * 2008-2010  add-ons, fixes and cleanup.
+# * 20/09/2011 export files to github, for better control of changes and improvements, plus version control.
+
 
 if [ -z "${PS1}" ]; then
 	return
 fi
 
-LC_ALL=es_AR.UTF-8
-PATH=${PATH}:~/bin:~/local/bin:~/usr/bin:/sbin:/usr/sbin:/usr/local/sbin
-EDITOR=joe
-VISUAL=cream
-PAGER=less
+export LC_ALL=es_AR.UTF-8
+export PATH=${PATH}:~/bin:~/local/bin:~/usr/bin:/sbin:/usr/sbin:/usr/local/sbin
+export EDITOR=joe
+export VISUAL=cream
+export PAGER=less
+
+export HISTFILE LESS PS1 PS2
+
+# Less Colors for Man Pages
+export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
+export LESS_TERMCAP_me=$'\E[0m'           # end mode
+export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - infobox
+export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
 #
 # Nota sobre jobcount, update_ps1 and PROMPT_COMMAND:
@@ -36,83 +49,8 @@ function update_ps1 ()
 PROMPT_COMMAND='update_ps1'
 PS2='> '
 
-export HISTFILE LESS VISUAL EDITOR PAGER PATH LC_ALL PS1 PS2 MANPATH
-export EDITOR VISUAL PAGER
-
 
 eval `dircolors -b`
 
-function clear ()
-{
-	tput clear
-}
 
-function psgrep ()
-{
-	ps -A | grep $1 | grep -v grep
-}
-
-function pskill ()
-{
-	local pid
-
-	pid=$(ps -A | grep $1 | grep -v grep | awk '{ print $1 }')
-	echo -n "killing $1 (pid ${pid})... "
-	kill -9 ${pid}
-	echo "ok"
-}
-
-function new-alias ()
-{
-	local name=$1
-	local value="$2"
-
-	echo alias ${name}=\'${value}\' >> ~/.bashrc
-	eval alias ${name}=\'${value}\'
-	alias ${name}
-}
-
-function push ()
-{
-	pushd .
-}
-
-
-function bat ()
-{
-	echo "Battery status: "
-	cat /proc/acpi/battery/BAT0/state | grep "present"
-	cat /proc/acpi/battery/BAT0/state | grep "charging state"
-	cat /proc/acpi/battery/BAT0/info | grep "design capacity:"
-	cat /proc/acpi/battery/BAT0/info | grep warning
-	cat /proc/acpi/battery/BAT0/state | grep remaining
-}
-
-function ccopy ()
-{ 
-	cp $1 /tmp/ccopy.$1; 
-}
-
-function calc ()
-{ 
-	echo "${1}"|bc -l; 
-}
-
-alias cpaste="ls /tmp/ccopy* | sed 's|[^\.]*.\.||' | xargs -I % mv /tmp/ccopy.% ./%"
-alias ls='ls -F --color'
-alias l='ls -l -F --color'
-alias la='ls -a -F --color'
-alias logout='clear && logout'
-alias j='joe'
-alias ll='ls -lh -a -F --color'
-alias cdp='cd /home/pub/'
-alias cd..='cd ..'
-alias msg='sudo tail -f /var/log/messages'
-alias gmail='fetchmail -v -m "procmail -d %T"'
-alias less='less -x 4'
-alias rbak='rm *~'
-alias cdw='cd ~/local/work'
-alias sshot='import -window root shot-$(date +%Y%m%d%k%M).jpg'
-alias dirf='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"'
-alias clasicos="history | awk '{print $2}' | sort | uniq -c | sort -rn | head "
 
