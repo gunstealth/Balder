@@ -11,6 +11,7 @@ if [ -z "${PS1}" ]; then
 	return
 fi
 
+# Some exports
 export LC_ALL=es_AR.UTF-8
 export PATH=${PATH}:~/bin:~/local/bin:~/usr/bin:/sbin:/usr/sbin:/usr/local/sbin
 export EDITOR=joe

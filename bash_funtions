@@ -21,12 +21,12 @@ function pskill ()
 	echo "ok"
 }
 
-function new-alias ()
+function n-alias ()
 {
 	local name=$1
 	local value="$2"
 
-	echo alias ${name}=\'${value}\' >> ~/.bashrc
+	echo alias ${name}=\'${value}\' >> ~/.bash_alias
 	eval alias ${name}=\'${value}\'
 	alias ${name}
 }
