@@ -9,7 +9,7 @@
 # includes
 . /bash_alias
 . /bash_functions
-- /bash_exports
+. /bash_exports
 
 # Algunos exports
 
