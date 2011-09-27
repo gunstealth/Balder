@@ -1,5 +1,5 @@
 #!/bin/sh
-#                                                       -*- .bash_profile - 1.0 -*-
+#                                                       -*- .bash_profile - 0.9b -*-
 # Copyright (C) (2006, 2011) Mauro N. Guerra.
 #
 # * 02/01/2006 re-write and cleanup.
