@@ -1,0 +1,25 @@
+#!/bin/sh
+#                                                       -*- .bash_exports -*-
+# Copyright (C) (2003, 2011) Mauro N. Guerra.
+#
+# * 02/01/2006 re-write and cleanup.
+# * 2008-2010  add-ons, fixes and cleanup.
+# * 20/09/2011 export files to github, for better control of changes and improvements, plus version control.
+
+
+# Proxy HTTP FTP
+ftp_proxy="http://proxy:21"
+http_proxy="http://proxy:8080"
+
+# todo.txt defaults actions
+export TODOTXT_DEFAULT_ACTION=ls
+export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
+
+# Less Colors for Man Pages
+export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
+export LESS_TERMCAP_me=$'\E[0m'           # end mode
+export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - infobox
+export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
