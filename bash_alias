@@ -8,6 +8,7 @@
 
 
 # Algunos alias
+alias resource='source ~/.bashrc'
 alias t='todo.sh -d ~/local/2do/todo.cfg'
 alias cpaste="ls /tmp/ccopy* | sed 's|[^\.]*.\.||' | xargs -I % mv /tmp/ccopy.% ./%"
 alias ls='ls -F --color'
@@ -27,3 +28,6 @@ alias sshot='import -window root shot-$(date +%Y%m%d%k%M).jpg'
 alias dirf='find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"'
 alias clasicos="history | awk '{print $2}' | sort | uniq -c | sort -rn | head "
 
+# Disk
+alias dff='df -x devtmpfs -x tmpfs -h | column -t'
+alias duu="du -h -d 1 | sed -e 's/\.\///g' -e 's/\.$/<-- Total dir size/'"

@@ -7,16 +7,69 @@
 # * 20/09/2011 export files to github, for better control of changes and improvements, plus version control.
 
 
+# extraer algunos archivos
+extract() {
+if [ -f "$1" ] ; then
+       case $1 in
+         *.tar.bz2) tar xjf ;;
+         *.tar.gz)  tar xzf $1 ;;
+      *.tar.xz)  tar xJf $1 ;;
+         *.bz2)     bunzip2 $1 ;;
+         *.gz)      gunzip  $1 ;;
+         *.tar)     tar xf  $1 ;;
+         *.tbz2)    tar xjf $1 ;;
+         *.tgz)     tar xzf $1 ;;
+         *.7z)      7z x    $1 ;;
+         *.Z)       uncompress ;;
+         *.exe)     cabextract ;;
+         *.rar)     unrar x $1 ;;
+         *.xz)      unxz    $1 ;;
+         *.zip)     unzip   $1 ;;
+         *)     echo "$0: No puedo extraer $1: Que estas queriendo abrir?, no conosco el archivo"
+      return 1
+      ;;
+       esac
+else
+       echo "$0: No puedo extraer $1: El archivo debe estar dañado"
+       return 1
+fi
+return 0
+}
+
+# Para leer doc de toke
+docview ()
+{
+  if [ -f $1 ] ; then
+      case $1 in
+          *.pdf)                             xpdf    $1  ;;
+          *.ps|*.odt|*.doc)          abiword $1  ;;
+          *.txt)                             leafpad $1  ;;
+       *.png|*.jpg|*.jpeg|*.gif)     feh     $1  ;;
+          *)   echo "No se como extraer '$1'..." ;;
+      esac
+  else
+      echo "'$1' no es un archivo valido!"
+  fi
+}
+
+# Comprimido de directorios rapido
+mktar() { tar cf  "${1%%/}.tar"     "${1%%/}/"; }
+mktgz() { tar czf "${1%%/}.tar.gz"  "${1%%/}/"; }
+mktbz() { tar cjf "${1%%/}.tar.bz2" "${1%%/}/"; }
+
+# Tunning para limpiar la pantalla
 function clear ()
 {
 	tput clear
 }
 
+# algunos mods para grep
 function psgrep ()
 {
 	ps -A | grep $1 | grep -v grep
 }
 
+# Una mescla de kill con ps
 function pskill ()
 {
 	local pid
@@ -27,6 +80,7 @@ function pskill ()
 	echo "ok"
 }
 
+# Crear nuevos alias
 function n-alias ()
 {
 	local name=$1
@@ -37,12 +91,14 @@ function n-alias ()
 	alias ${name}
 }
 
+# Mail pa afuera :P
 function push ()
 {
 	pushd .
 }
 
 
+# Cuanta pila nos queda HAL???
 function bat ()
 {
 	echo "Battery status: "
@@ -52,6 +108,7 @@ function bat ()
 	cat /proc/acpi/battery/BAT0/info | grep warning
 	cat /proc/acpi/battery/BAT0/state | grep remaining
 }
+
 
 function ccopy ()
 { 
